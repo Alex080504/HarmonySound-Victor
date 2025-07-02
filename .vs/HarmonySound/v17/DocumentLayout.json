@@ -3,48 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\userplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\userplan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\controllers\\albumscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\controllers\\albumscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\userrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\harmonysound.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\harmonysound.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\subscriptionhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\subscriptionhistory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\statistic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\statistic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\plan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\plan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\contentalbum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\contentalbum.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\harmonysound.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|solutionrelative:harmonysound.models\\harmonysound.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,8 +22,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HarmonySound.Models",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\HarmonySound.Models.csproj",
+              "RelativeDocumentMoniker": "HarmonySound.Models\\HarmonySound.Models.csproj",
+              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\HarmonySound.Models.csproj",
+              "RelativeToolTip": "HarmonySound.Models\\HarmonySound.Models.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-02T22:30:08.605Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -67,135 +48,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserRole.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\UserRole.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\UserRole.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\UserRole.cs",
-              "RelativeToolTip": "HarmonySound.Models\\UserRole.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:53:12.086Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserPlan.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\UserPlan.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\UserPlan.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\UserPlan.cs",
-              "RelativeToolTip": "HarmonySound.Models\\UserPlan.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:52:51.498Z",
+              "Title": "HarmonySound.API.csproj",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\HarmonySound.API.csproj",
+              "RelativeDocumentMoniker": "HarmonySound.API\\HarmonySound.API.csproj",
+              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\HarmonySound.API.csproj",
+              "RelativeToolTip": "HarmonySound.API\\HarmonySound.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-02T22:16:58.977Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\User.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\User.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\User.cs",
-              "RelativeToolTip": "HarmonySound.Models\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AlbumsController.cs",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Controllers\\AlbumsController.cs",
+              "RelativeDocumentMoniker": "HarmonySound.API\\Controllers\\AlbumsController.cs",
+              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Controllers\\AlbumsController.cs",
+              "RelativeToolTip": "HarmonySound.API\\Controllers\\AlbumsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:52:28.994Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubscriptionHistory.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\SubscriptionHistory.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\SubscriptionHistory.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\SubscriptionHistory.cs",
-              "RelativeToolTip": "HarmonySound.Models\\SubscriptionHistory.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAgwBcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:51:33.37Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Statistic.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Statistic.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Statistic.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Statistic.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Statistic.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:51:04.455Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Role.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Role.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Role.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Role.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:47:07.774Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Report.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Report.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Report.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Report.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Report.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:46:26.112Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Plan.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Plan.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Plan.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Plan.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Plan.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:45:42.925Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ContentAlbum.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\ContentAlbum.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\ContentAlbum.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\ContentAlbum.cs",
-              "RelativeToolTip": "HarmonySound.Models\\ContentAlbum.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:43:19.649Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Content.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Content.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Content.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Content.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Content.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:42:21.583Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Album.cs",
-              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Album.cs",
-              "RelativeDocumentMoniker": "HarmonySound.Models\\Album.cs",
-              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Album.cs",
-              "RelativeToolTip": "HarmonySound.Models\\Album.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T21:39:31.178Z"
+              "WhenOpened": "2025-07-02T22:13:13.373Z",
+              "EditorCaption": ""
             }
           ]
         }
