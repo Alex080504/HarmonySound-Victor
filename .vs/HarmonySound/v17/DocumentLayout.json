@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A3116F19-4E34-98B3-337A-D32D36D27330}|HarmonySound.MVC\\HarmonySound.MVC.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.mvc\\harmonysound.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A3116F19-4E34-98B3-337A-D32D36D27330}|HarmonySound.MVC\\HarmonySound.MVC.csproj|solutionrelative:harmonysound.mvc\\harmonysound.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\migrations\\20250702224449_v01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\migrations\\20250702224449_v01.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{60019E35-947D-49EE-A6AA-169B6310D75E}|HarmonySound.API\\HarmonySound.API.csproj|solutionrelative:harmonysound.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}|HarmonySound.Models\\HarmonySound.Models.csproj|c:\\users\\gigabyte\\documents\\herramientas\\web-harmonysound\\harmonysound.models\\harmonysound.models.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -46,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,20 +62,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "HarmonySound.MVC",
+              "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.MVC\\HarmonySound.MVC.csproj",
+              "RelativeDocumentMoniker": "HarmonySound.MVC\\HarmonySound.MVC.csproj",
+              "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.MVC\\HarmonySound.MVC.csproj",
+              "RelativeToolTip": "HarmonySound.MVC\\HarmonySound.MVC.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-05T02:44:26.353Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "20250702224449_v01.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Migrations\\20250702224449_v01.cs",
               "RelativeDocumentMoniker": "HarmonySound.API\\Migrations\\20250702224449_v01.cs",
               "ToolTip": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Migrations\\20250702224449_v01.cs",
               "RelativeToolTip": "HarmonySound.API\\Migrations\\20250702224449_v01.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-02T22:44:49.634Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Program.cs",
               "RelativeDocumentMoniker": "HarmonySound.API\\Program.cs",
@@ -79,11 +96,12 @@
               "RelativeToolTip": "HarmonySound.API\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:43:51.105Z"
+              "WhenOpened": "2025-07-02T22:43:51.105Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\appsettings.json",
               "RelativeDocumentMoniker": "HarmonySound.API\\appsettings.json",
@@ -91,11 +109,12 @@
               "RelativeToolTip": "HarmonySound.API\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-02T22:42:17.11Z"
+              "WhenOpened": "2025-07-02T22:42:17.11Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "UserRole.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\UserRole.cs",
               "RelativeDocumentMoniker": "HarmonySound.Models\\UserRole.cs",
@@ -103,11 +122,12 @@
               "RelativeToolTip": "HarmonySound.Models\\UserRole.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:39:01.119Z"
+              "WhenOpened": "2025-07-02T22:39:01.119Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Role.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\Role.cs",
               "RelativeDocumentMoniker": "HarmonySound.Models\\Role.cs",
@@ -115,11 +135,12 @@
               "RelativeToolTip": "HarmonySound.Models\\Role.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:35:59.91Z"
+              "WhenOpened": "2025-07-02T22:35:59.91Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\User.cs",
               "RelativeDocumentMoniker": "HarmonySound.Models\\User.cs",
@@ -127,11 +148,12 @@
               "RelativeToolTip": "HarmonySound.Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:33:30.479Z"
+              "WhenOpened": "2025-07-02T22:33:30.479Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "HarmonySound.Models.csproj",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.Models\\HarmonySound.Models.csproj",
               "RelativeDocumentMoniker": "HarmonySound.Models\\HarmonySound.Models.csproj",
@@ -139,11 +161,12 @@
               "RelativeToolTip": "HarmonySound.Models\\HarmonySound.Models.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-02T22:30:08.605Z"
+              "WhenOpened": "2025-07-02T22:30:08.605Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "HarmonySound.API.csproj",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\HarmonySound.API.csproj",
               "RelativeDocumentMoniker": "HarmonySound.API\\HarmonySound.API.csproj",
@@ -151,11 +174,12 @@
               "RelativeToolTip": "HarmonySound.API\\HarmonySound.API.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-02T22:16:58.977Z"
+              "WhenOpened": "2025-07-02T22:16:58.977Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "AlbumsController.cs",
               "DocumentMoniker": "C:\\Users\\GIGABYTE\\Documents\\herramientas\\Web-HarmonySound\\HarmonySound.API\\Controllers\\AlbumsController.cs",
               "RelativeDocumentMoniker": "HarmonySound.API\\Controllers\\AlbumsController.cs",
@@ -163,7 +187,8 @@
               "RelativeToolTip": "HarmonySound.API\\Controllers\\AlbumsController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-02T22:13:13.373Z"
+              "WhenOpened": "2025-07-02T22:13:13.373Z",
+              "EditorCaption": ""
             }
           ]
         }

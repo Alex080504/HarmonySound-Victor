@@ -1,10 +1,12 @@
-﻿using HarmonySound.API.Consumer;
-using HarmonySound.Models;
-using HarmonySound.MVC.Models;
+﻿using HarmonySound.Models;
+using HarmonySound.API.Consumer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+
 namespace HarmonySound.MVC.Controllers
 {
     [Authorize]
@@ -17,71 +19,85 @@ namespace HarmonySound.MVC.Controllers
             _httpClient = httpClient;
         }
 
+        // Este método se invoca cuando el formulario de la vista "UploadAudio" se envía.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UploadAudio(ContentUploadDto model)
+        public async Task<IActionResult> UploadAudio(IFormCollection form)
         {
             try
             {
-                if (model.File == null || model.File.Length == 0)
+                // Obtener el archivo desde el formulario
+                var file = form.Files["File"];
+                if (file == null || file.Length == 0)
                 {
-                    ModelState.AddModelError("", "Por favor selecciona un archivo.");
-                    return View();
+                    TempData["Error"] = "Archivo no válido.";
+                    return RedirectToAction("Index"); // Redirige a la vista Index en caso de error
                 }
 
-                var formData = new MultipartFormDataContent();
-                formData.Add(new StringContent(model.Title), "Title");
-                formData.Add(new StringContent(model.Type), "Type");
-                formData.Add(new StringContent(model.ArtistId.ToString()), "ArtistId");
-                formData.Add(new StreamContent(model.File.OpenReadStream()), "File", model.File.FileName);
+                // Log de información sobre el archivo
+                System.Diagnostics.Debug.WriteLine($"Nombre: {file.FileName}, Tamaño: {file.Length}");
 
-                var response = await _httpClient.PostAsync("https://localhost:7120/api/Contents/upload", formData);
+                if (string.IsNullOrWhiteSpace(form["Title"]) || string.IsNullOrWhiteSpace(form["Type"]) || string.IsNullOrWhiteSpace(form["ArtistId"]))
+                {
+                    TempData["Error"] = "Todos los campos son obligatorios.";
+                    return RedirectToAction("Index");
+                }
+
+                using var content = new MultipartFormDataContent();
+                content.Add(new StringContent(form["Title"]), "Title"); // Título del contenido
+                content.Add(new StringContent(form["Type"]), "Type");   // Tipo del contenido
+                content.Add(new StringContent(form["ArtistId"]), "ArtistId"); // ID del artista
+
+                // Validar tamaño máximo antes de abrir el stream
+                if (file.Length > 50 * 1024 * 1024)
+                {
+                    TempData["Error"] = "El archivo es demasiado grande.";
+                    return RedirectToAction("Index");
+                }
+
+                // Agregar el archivo al contenido
+                content.Add(new StreamContent(file.OpenReadStream()), "File", file.FileName);
+
+                // Realizar la solicitud POST a la API para cargar el archivo
+                var response = await _httpClient.PostAsync("https://localhost:7120/api/Contents/upload", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsStringAsync();
-                    return RedirectToAction("Index"); // O lo que desees hacer con la respuesta
+                    TempData["Success"] = "Archivo subido con éxito.";
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Error al subir el archivo.");
-                    return View();
+                    var errorMsg = await response.Content.ReadAsStringAsync();
+                    TempData["Error"] = $"Error al subir el archivo: {errorMsg}";
                 }
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", "Error al intentar procesar el archivo.");
-                return View();
+                TempData["Error"] = "Excepción: " + ex.ToString();
+                System.Diagnostics.Debug.WriteLine("Excepción: " + ex.ToString());
             }
+
+            return RedirectToAction("Index"); // Redirige al Index después de intentar subir el archivo
         }
+
+        // Método que muestra todos los contenidos del artista
         public async Task<IActionResult> Index()
         {
+            // Obtén el ID del artista (usuario autenticado)
             var nameIdentifierClaim = User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             if (nameIdentifierClaim == null || !int.TryParse(nameIdentifierClaim.Value, out int artistId))
             {
                 ViewBag.Error = "Tu sesión no es válida. Por favor, cierra sesión y vuelve a iniciar sesión.";
-                return View("Error401");
+                return View("Error401"); // Muestra una vista de error si el usuario no tiene sesión
             }
 
+            // Configura el endpoint de la API para obtener todos los contenidos del artista
             Crud<Content>.EndPoint = "https://localhost:7120/api/Contents";
-            var allContents = Crud<Content>.GetAll(); // Cambia a async si es posible
+            var allContents = Crud<Content>.GetAll(); // Obtiene todos los contenidos
+
+            // Filtra los contenidos para mostrar solo los del artista actual
             var myContents = allContents.Where(c => c.ArtistId == artistId).ToList();
-            return View(myContents);
-        }
-
-        public async Task<IActionResult> Details(int id)
-        {
-            // Obtener detalles del artista con su ID desde la API
-            Crud<User>.EndPoint = "https://localhost:7160/api/Users"; // Ajusta el endpoint a tu API
-
-            // Obtener los datos del artista desde la API de manera asincrónica
-            var artist = await Task.Run(() => Crud<User>.GetById(id));
-
-            if (artist == null)
-                return NotFound(); // Si no se encuentra al artista, retornar un error 404
-
-            // Pasar los datos del artista a la vista
-            return View(artist);
+            return View(myContents); // Pasa los contenidos al Index
         }
     }
 }
