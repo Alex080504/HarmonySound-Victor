@@ -1,10 +1,14 @@
-using HarmonySound.Models;
+﻿using HarmonySound.Models;
+using HarmonySound.API.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Http.Features;
+using HarmonySound.API.Services;
+using Microsoft.AspNetCore.Identity.UI.Services; 
 
 namespace HarmonySound.API
 {
@@ -21,7 +25,7 @@ namespace HarmonySound.API
                 .AddEntityFrameworkStores<HarmonySoundDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Configurar la autenticaci�n JWT
+            // Configurar la autenticación JWT
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -33,15 +37,27 @@ namespace HarmonySound.API
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = builder.Configuration["JWT:Issuer"],
-                        ValidAudience = builder.Configuration["JWT:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
                 });
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 200 * 1024 * 1024; // 200 MB
+            });
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            // Registro de servicios personalizados
+            builder.Services.AddTransient<IEmailSender, EmailService>();
+            builder.Services.AddTransient<IJwtService, JwtService>();
+            builder.Services.AddTransient<I2FAService, TwoFactorAuthService>();
+            builder.Services.AddMemoryCache(); // Necesario para TwoFactorAuthService
 
             var app = builder.Build();
 

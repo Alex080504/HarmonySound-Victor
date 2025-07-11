@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Welcome Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-container">
+    <h1 class="page-title">Welcome to Harmony Sound</h1>
+    <p class="page-description">
+        Discover and listen to music uploaded by your favorite artists. Explore content tailored for you.
+    </p>
+    <a href="@Url.Action("Index", "Clients")" class="btn-green">Go to Music Library</a>
+    <a href="@Url.Action("Index", "Playlists")" class="btn-green" style="margin-left: 10px;">Manage Playlists</a>
+    <a href="@Url.Action("Index", "Plans")" class="btn-green" style="margin-left: 10px;">Manage Subscription</a>
+</div>
+

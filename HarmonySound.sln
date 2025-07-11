@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1
+VisualStudioVersion = 17.14.36202.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonySound.Models", "HarmonySound.Models\HarmonySound.Models.csproj", "{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonySound.Models", "HarmonySound.Models\HarmonySound.Models.csproj", "{6CBABC32-98C2-4F8E-A1DF-D6F42D92E643}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonySound.API", "HarmonySound.API\HarmonySound.API.csproj", "{60019E35-947D-49EE-A6AA-169B6310D75E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonySound.API", "HarmonySound.API\HarmonySound.API.csproj", "{4600AF5A-5BD1-439D-B4BC-CC6458BF7C9F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HarmonySound.API.Consumer", "HarmonySound.API.Consumer\HarmonySound.API.Consumer.csproj", "{817E5B78-0F21-FB8E-ADFA-FF846FF39853}"
 EndProject
@@ -17,14 +17,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C486FF05-2F18-4C53-A9EB-FCAB435A7A30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{60019E35-947D-49EE-A6AA-169B6310D75E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{60019E35-947D-49EE-A6AA-169B6310D75E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{60019E35-947D-49EE-A6AA-169B6310D75E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{60019E35-947D-49EE-A6AA-169B6310D75E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CBABC32-98C2-4F8E-A1DF-D6F42D92E643}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CBABC32-98C2-4F8E-A1DF-D6F42D92E643}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CBABC32-98C2-4F8E-A1DF-D6F42D92E643}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CBABC32-98C2-4F8E-A1DF-D6F42D92E643}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4600AF5A-5BD1-439D-B4BC-CC6458BF7C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4600AF5A-5BD1-439D-B4BC-CC6458BF7C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4600AF5A-5BD1-439D-B4BC-CC6458BF7C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4600AF5A-5BD1-439D-B4BC-CC6458BF7C9F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{817E5B78-0F21-FB8E-ADFA-FF846FF39853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{817E5B78-0F21-FB8E-ADFA-FF846FF39853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{817E5B78-0F21-FB8E-ADFA-FF846FF39853}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +38,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8EA8951F-3F55-4789-857F-12E935AA2C1D}
+		SolutionGuid = {B5C99A49-F1CC-4D69-A7AC-67947CCBD673}
 	EndGlobalSection
 EndGlobal

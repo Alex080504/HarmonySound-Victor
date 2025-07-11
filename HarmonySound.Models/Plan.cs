@@ -8,7 +8,7 @@ namespace HarmonySound.Models
 
         [Required]
         [MaxLength(30)]
-        public string PlanName { get; set; }
+        public string PlanName { get; set; }  
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int AccountLimit { get; set; }

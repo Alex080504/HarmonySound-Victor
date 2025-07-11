@@ -18,7 +18,7 @@ namespace HarmonySound.Models
 
         public string State { get; set; }  // Ejemplo: "Éxito", "Fallido"
 
-        public string PaymentMethod { get; set; }  // "PayPal"
+        public string PaymentMethod { get; set; }  // "PayPhone"
 
         public string PayReference { get; set; }
 

@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+
 namespace HarmonySound.Models
 {
     public class User : IdentityUser<int>
     {
+        // Tus propiedades personalizadas
         [Required] public string Name { get; set; }
         [Required][EmailAddress] public override string Email { get; set; }
         [Required] public DateTimeOffset RegisterDate { get; set; }

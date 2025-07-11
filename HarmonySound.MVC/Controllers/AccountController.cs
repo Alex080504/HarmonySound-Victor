@@ -85,9 +85,9 @@ namespace HarmonySound.MVC.Controllers
 
                     // Redirigir según el rol
                     if (role != null && role.Equals("Client", StringComparison.OrdinalIgnoreCase))
-                        return RedirectToAction("Index", "Clients");
+                        return RedirectToAction("Home", "Clients");
                     else if (role != null && role.Equals("Artist", StringComparison.OrdinalIgnoreCase))
-                        return RedirectToAction("Index", "Artists");
+                        return RedirectToAction("Home", "Artists");
                     else
                         return RedirectToAction("Index", "Home");
                 }
@@ -191,6 +191,11 @@ namespace HarmonySound.MVC.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Account");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         private string GetRoleFromJwt(string token)
