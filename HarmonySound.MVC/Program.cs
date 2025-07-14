@@ -55,6 +55,33 @@ namespace HarmonySound.MVC
                     options.LogoutPath = "/Account/Logout"; // Ruta para logout
                 });
 
+            builder.Services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.Events.OnSigningIn = context =>
+                {
+                    var identity = (System.Security.Claims.ClaimsIdentity)context.Principal.Identity;
+
+                    // Mapea cualquier claim "role" o "roles" a ClaimTypes.Role
+                    var roleClaims = identity.FindAll("role").ToList();
+                    foreach (var rc in roleClaims)
+                    {
+                        identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, rc.Value));
+                    }
+                    var rolesClaims = identity.FindAll("roles").ToList();
+                    foreach (var rc in rolesClaims)
+                    {
+                        identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, rc.Value));
+                    }
+                    // Mapea también el claim de rol con el namespace largo (el que realmente llega en tu JWT)
+                    var msRoleClaims = identity.FindAll("http://schemas.microsoft.com/ws/2008/06/identity/claims/role").ToList();
+                    foreach (var rc in msRoleClaims)
+                    {
+                        identity.AddClaim(new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, rc.Value));
+                    }
+                    return Task.CompletedTask;
+                };
+            });
+
             // Configuración de sesiones en memoria (sin DbContext en MVC)
             builder.Services.AddDistributedMemoryCache();
             builder.Services.AddSession(options =>
@@ -64,7 +91,13 @@ namespace HarmonySound.MVC
                 options.Cookie.IsEssential = true; // Hace la cookie esencial
             });
 
-            // Agregar controladores y vistas
+            // Agregar controladores y vistas con opciones JSON
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+                    options.JsonSerializerOptions.MaxDepth = 64; // Opcional: aumenta la profundidad máxima si es necesario
+                });
             builder.Services.AddControllersWithViews();
             builder.Services.AddSession();  // Asegura que la sesión esté disponible
 
