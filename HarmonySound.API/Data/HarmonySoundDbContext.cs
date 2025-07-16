@@ -29,6 +29,7 @@ namespace HarmonySound.API.Data
         public DbSet<Statistic> Statistics { get; set; } = default!;
         public DbSet<SubscriptionHistory> SubscriptionsHistories { get; set; } = default!;
         public DbSet<UserPlan> UsersPlans { get; set; } = default!;
+        public DbSet<UserLike> UserLikes { get; set; } = default!;
 
         // No agregues DbSet<Role> ni DbSet<UserRole> aquí
 
@@ -36,7 +37,7 @@ namespace HarmonySound.API.Data
         {
             base.OnModelCreating(builder);
 
-            // Configuración explícita para UserRole
+            // Configuración para UserRole
             builder.Entity<UserRole>(userRole =>
             {
                 userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
@@ -52,19 +53,28 @@ namespace HarmonySound.API.Data
                     .IsRequired();
             });
 
-            // Configuración para PlaylistContent
+            // Configuración para PlaylistContent (tabla intermedia)
             builder.Entity<PlaylistContent>()
                 .HasKey(pc => new { pc.PlaylistId, pc.ContentId });
 
             builder.Entity<PlaylistContent>()
                 .HasOne(pc => pc.Playlist)
                 .WithMany(p => p.PlaylistContents)
-                .HasForeignKey(pc => pc.PlaylistId);
+                .HasForeignKey(pc => pc.PlaylistId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<PlaylistContent>()
                 .HasOne(pc => pc.Content)
                 .WithMany()
-                .HasForeignKey(pc => pc.ContentId);
+                .HasForeignKey(pc => pc.ContentId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            // Configuración para Playlist
+            builder.Entity<Playlist>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<HarmonySound.Models.Playlist> Playlist { get; set; } = default!;

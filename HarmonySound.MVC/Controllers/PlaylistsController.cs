@@ -22,17 +22,44 @@ namespace HarmonySound.MVC.Controllers
         // Mostrar todas las canciones y playlists del usuario
         public async Task<IActionResult> Index()
         {
-            // Obtén playlists con sus canciones (ajusta según tu API)
-            var playlistsResponse = await _httpClient.GetAsync("https://localhost:7120/api/Playlists");
-            var playlistsJson = await playlistsResponse.Content.ReadAsStringAsync();
-            var playlists = JsonSerializer.Deserialize<List<PlaylistDto>>(playlistsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-            var songsResponse = await _httpClient.GetAsync("https://localhost:7120/api/Contents");
-            var songsJson = await songsResponse.Content.ReadAsStringAsync();
-            var songs = JsonSerializer.Deserialize<List<Content>>(songsJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-            ViewBag.Songs = songs;
-
-            return View(playlists);
+            try
+            {
+                int userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                
+                // Usar el endpoint específico del usuario
+                var playlistsResponse = await _httpClient.GetAsync($"https://localhost:7120/api/Playlists/user/{userId}");
+                
+                if (playlistsResponse.IsSuccessStatusCode)
+                {
+                    var playlistsJson = await playlistsResponse.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                    var playlistsData = JsonSerializer.Deserialize<JsonElement[]>(playlistsJson, options);
+                    
+                    // Convertir a PlaylistDto con canciones
+                    var userPlaylists = playlistsData.Select(p => new PlaylistDto
+                    {
+                        Id = p.GetProperty("id").GetInt32(),
+                        Name = p.GetProperty("name").GetString(),
+                        Songs = p.TryGetProperty("songs", out var songs) 
+                            ? songs.EnumerateArray().Select(s => new PlaylistSongDto
+                            {
+                                ContentId = s.GetProperty("contentId").GetInt32(),
+                                Title = s.GetProperty("title").GetString(),
+                                UrlMedia = s.GetProperty("urlMedia").GetString()
+                            }).ToList() 
+                            : new List<PlaylistSongDto>()
+                    }).ToList();
+                        
+                    return View(userPlaylists);
+                }
+                
+                return View(new List<PlaylistDto>());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error in PlaylistsController.Index: {ex.Message}");
+                return View(new List<PlaylistDto>());
+            }
         }
 
         // Agregar canción a playlist

@@ -44,29 +44,62 @@
                 <ul>
                     @foreach (var artist in Model.Artists)
                     {
-                        <li>@artist.Name</li> <!-- Email oculto -->
+                        <li style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <img src="@artist.ProfileImageUrl ?? Url.Content("~/images/default-profile.png")"
+                                 alt="Foto de @artist.Name"
+                                 style="width:40px;height:40px;border-radius:50%;object-fit:cover;margin-right:8px;" />
+                            <span>@artist.Name</span>
+                        </li>
                     }
                 </ul>
             }
             if (Model.Contents?.Any() == true)
             {
                 <h4>Contenidos encontrados</h4>
-                <ul>
+                <div class="row">
                     @foreach (var content in Model.Contents)
                     {
-                        <li>
-                            @content.Title (@content.Type)
-                            @if (!string.IsNullOrEmpty(content.UrlMedia))
-                            {
-                                <br />
-                                <audio controls style="width: 250px;">
-                                    <source src="@content.UrlMedia" type="audio/mpeg" />
-                                    Tu navegador no soporta el elemento de audio.
-                                </audio>
-                            }
-                        </li>
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@content.Title</h5>
+                                    <p class="card-text">@content.Type</p>
+                                    
+                                    @if (!string.IsNullOrEmpty(content.UrlMedia))
+                                    {
+                                        <!-- Audio personalizado con sistema de anuncios -->
+                                        <div class="audio-container" data-content-id="@content.Id">
+                                            <audio controls style="width: 100%;" class="mb-2 main-audio" data-src="@content.UrlMedia">
+                                                <source src="@content.UrlMedia" type="audio/mpeg" />
+                                                Tu navegador no soporta el elemento de audio.
+                                            </audio>
+                                            <div class="ad-notification" style="display: none;">
+                                                <small class="text-muted">Reproduciendo anuncio... <span class="ad-countdown"></span></small>
+                                            </div>
+                                        </div>
+                                    }
+                                    
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <button class="btn btn-outline-primary btn-sm like-btn" 
+                                                    data-content-id="@content.Id" 
+                                                    data-user-id="@Model.Profile.Id">
+                                                ❤️ <span class="like-count">0</span>
+                                            </button>
+                                            <button class="btn btn-outline-secondary btn-sm ms-2 playlist-btn" 
+                                                    data-content-id="@content.Id" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#playlistModal">
+                                                📋 Agregar a Playlist
+                                            </button>
+                                        </div>
+                                        <small class="text-muted">Por: Artista</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     }
-                </ul>
+                </div>
             }
             if ((Model.Artists == null || !Model.Artists.Any()) && (Model.Contents == null || !Model.Contents.Any()))
             {
@@ -76,13 +109,510 @@
     </div>
 </div>
 
+<!-- Modal y toast containers igual que antes -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto">Harmony Sound</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toast-message">
+            <!-- Mensaje dinámico aquí -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal para seleccionar playlist -->
+<div class="modal fade" id="playlistModal" tabindex="-1" aria-labelledby="playlistModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="playlistModalLabel">Agregar a Playlist</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="playlist-list">
+                    <!-- Las playlists se cargarán aquí dinámicamente -->
+                </div>
+                <hr>
+                <div class="mt-3">
+                    <input type="text" id="new-playlist-name" class="form-control" placeholder="Nombre de nueva playlist">
+                    <button type="button" class="btn btn-success mt-2" id="create-playlist-btn">Crear Nueva Playlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
+        let selectedContentId = null;
+        let isPremiumUser = false;
+        let audioStates = new Map();
+        
         $(document).ready(function () {
-            var success = '@ViewBag.Success';
-            if (success) {
-                alert(success);
-            }
+            // Verificar estado premium del usuario
+            checkPremiumStatus();
+            
+            // Cargar likes iniciales
+            loadLikes();
+            
+            // Configurar sistema de anuncios para cada audio
+            setupAudioAds();
+            
+            // EVENT HANDLER PARA BOTÓN DE PLAYLIST - CORREGIDO
+            $(document).on('click', '.playlist-btn', function(e) {
+                e.preventDefault();
+                selectedContentId = $(this).data('content-id');
+                console.log('=== BOTÓN PLAYLIST CLICKEADO ===');
+                console.log('Contenido seleccionado:', selectedContentId);
+                console.log('Elemento que disparó el evento:', this);
+                
+                // Verificar que el ID se guardó correctamente
+                if (!selectedContentId) {
+                    console.error('No se pudo obtener el content-id del botón');
+                    showToast('Error: No se pudo seleccionar el contenido', 'error');
+                    return;
+                }
+            });
+            
+            // EVENT HANDLER PARA CREAR NUEVA PLAYLIST
+            $('#create-playlist-btn').click(function() {
+                console.log('=== CREAR PLAYLIST CLICKEADO ===');
+                console.log('selectedContentId actual:', selectedContentId);
+                
+                if (!selectedContentId) {
+                    console.error('No hay contenido seleccionado para crear playlist');
+                    showToast('Error: No se ha seleccionado contenido', 'error');
+                    return;
+                }
+                
+                var playlistName = $('#new-playlist-name').val().trim();
+                if (playlistName === '') {
+                    showToast('Por favor ingresa un nombre para la playlist', 'error');
+                    return;
+                }
+                
+                createPlaylistAndAddContent(playlistName);
+            });
+            
+            // EVENT HANDLER PARA CUANDO SE ABRE EL MODAL - ESTE ES EL IMPORTANTE
+            $('#playlistModal').on('show.bs.modal', function (e) {
+                console.log('=== MODAL ABIERTO ===');
+                console.log('selectedContentId:', selectedContentId);
+                console.log('Botón que disparó el modal:', e.relatedTarget);
+                
+                // Si no hay selectedContentId, tratar de obtenerlo del botón que disparó el modal
+                if (!selectedContentId && e.relatedTarget) {
+                    selectedContentId = $(e.relatedTarget).data('content-id');
+                    console.log('Obtenido selectedContentId del relatedTarget:', selectedContentId);
+                }
+                
+                if (selectedContentId) {
+                    console.log('Cargando playlists...');
+                    loadUserPlaylists();
+                } else {
+                    console.error('No hay contenido seleccionado');
+                    $('#playlist-list').html('<div class="text-center p-4"><p class="text-danger">Error: No se ha seleccionado contenido</p><small class="text-muted">Intenta hacer clic en el botón "Agregar a Playlist" de una canción</small></div>');
+                }
+            });
+            
+            // EVENT HANDLER PARA LIMPIAR EL INPUT CUANDO SE CIERRA EL MODAL
+            $('#playlistModal').on('hide.bs.modal', function (e) {
+                console.log('=== MODAL CERRADO ===');
+                $('#new-playlist-name').val('');
+                // NO limpiar selectedContentId aquí para mantener la selección
+                // selectedContentId = null; // COMENTADO - Esta línea causaba el problema
+            });
+            
+            // EVENT HANDLER ADICIONAL - Para cuando se hace clic fuera del modal
+            $('#playlistModal').on('hidden.bs.modal', function (e) {
+                console.log('=== MODAL COMPLETAMENTE CERRADO ===');
+                // Limpiar selectedContentId solo después de que el modal se cierre completamente
+                setTimeout(function() {
+                    selectedContentId = null;
+                    console.log('selectedContentId limpiado después del cierre completo');
+                }, 500);
+            });
+            
+            // Event handler para likes
+            $('.like-btn').click(function() {
+                var contentId = $(this).data('content-id');
+                var userId = $(this).data('user-id');
+                var button = $(this);
+                
+                $.post('@Url.Action("LikeContent", "Clients")', { contentId: contentId, userId: userId })
+                    .done(function(data) {
+                        if (data.success) {
+                            loadLikesForContent(contentId);
+                            button.addClass('btn-primary').removeClass('btn-outline-primary');
+                            showToast('¡Contenido agregado a favoritos!', 'success');
+                        } else {
+                            $.post('@Url.Action("UnlikeContent", "Clients")', { contentId: contentId, userId: userId })
+                                .done(function(data) {
+                                    if (data.success) {
+                                        loadLikesForContent(contentId);
+                                        button.addClass('btn-outline-primary').removeClass('btn-primary');
+                                        showToast('Contenido removido de favoritos', 'info');
+                                    }
+                                });
+                        }
+                    })
+                    .fail(function() {
+                        showToast('Error al procesar la solicitud', 'error');
+                    });
+            });
         });
+        
+        function checkPremiumStatus() {
+            $.get('@Url.Action("CheckPremiumStatus", "Clients")')
+                .done(function(data) {
+                    isPremiumUser = data.isPremium;
+                    console.log('Usuario premium:', isPremiumUser);
+                })
+                .fail(function() {
+                    isPremiumUser = false;
+                });
+        }
+        
+        function setupAudioAds() {
+            $('.main-audio').each(function() {
+                var audioElement = this;
+                var $container = $(audioElement).closest('.audio-container');
+                var originalSrc = $(audioElement).data('src');
+                var audioId = 'audio_' + Math.random().toString(36).substr(2, 9);
+                
+                audioStates.set(audioId, {
+                    isPlayingAd: false,
+                    hasPlayedAd: false,
+                    originalSrc: originalSrc,
+                    adProcessing: false
+                });
+                
+                audioElement.dataset.audioId = audioId;
+                
+                audioElement.addEventListener('play', function(e) {
+                    handleAudioPlay(audioElement, audioId, $container);
+                });
+                
+                audioElement.addEventListener('ended', function(e) {
+                    handleAudioEnded(audioElement, audioId, $container);
+                });
+                
+                audioElement.addEventListener('error', function(e) {
+                    handleAudioError(audioElement, audioId, $container);
+                });
+            });
+        }
+        
+        function handleAudioPlay(audioElement, audioId, $container) {
+            var state = audioStates.get(audioId);
+            if (!state) return;
+            
+            if (isPremiumUser || state.hasPlayedAd) {
+                return;
+            }
+            
+            if (state.adProcessing || state.isPlayingAd) {
+                return;
+            }
+            
+            audioElement.pause();
+            playAdBeforeContent(audioElement, audioId, $container);
+        }
+        
+        function handleAudioEnded(audioElement, audioId, $container) {
+            var state = audioStates.get(audioId);
+            if (!state) return;
+            
+            if (state.isPlayingAd) {
+                state.hasPlayedAd = true;
+                state.isPlayingAd = false;
+                state.adProcessing = false;
+                
+                $container.find('.ad-notification').hide();
+                audioElement.src = state.originalSrc;
+                audioElement.load();
+                
+                setTimeout(function() {
+                    audioElement.play().catch(function(error) {
+                        console.error('Error al reproducir canción:', error);
+                    });
+                }, 100);
+                
+                showToast('¡Ahora reproduciendo tu música!', 'success');
+            } else {
+                state.hasPlayedAd = false;
+                state.isPlayingAd = false;
+                state.adProcessing = false;
+            }
+            
+            audioStates.set(audioId, state);
+        }
+        
+        function handleAudioError(audioElement, audioId, $container) {
+            var state = audioStates.get(audioId);
+            if (!state) return;
+            
+            if (state.isPlayingAd) {
+                state.hasPlayedAd = true;
+                state.isPlayingAd = false;
+                state.adProcessing = false;
+                
+                $container.find('.ad-notification').hide();
+                audioElement.src = state.originalSrc;
+                audioElement.load();
+                
+                setTimeout(function() {
+                    audioElement.play().catch(function(error) {
+                        console.error('Error al reproducir canción después del error:', error);
+                    });
+                }, 100);
+                
+                showToast('Error en anuncio, reproduciendo música', 'info');
+            }
+            
+            audioStates.set(audioId, state);
+        }
+        
+        function playAdBeforeContent(audioElement, audioId, $container) {
+            var state = audioStates.get(audioId);
+            if (!state || state.adProcessing) return;
+            
+            state.adProcessing = true;
+            audioStates.set(audioId, state);
+            
+            $.get('@Url.Action("GetRandomAd", "Clients")')
+                .done(function(adData) {
+                    state.isPlayingAd = true;
+                    state.adProcessing = false;
+                    audioStates.set(audioId, state);
+                    
+                    $container.find('.ad-notification').show();
+                    audioElement.src = adData.url;
+                    audioElement.load();
+                    
+                    var countdown = adData.duration;
+                    var countdownInterval = setInterval(function() {
+                        if (countdown > 0) {
+                            $container.find('.ad-countdown').text(countdown + 's');
+                            countdown--;
+                        } else {
+                            clearInterval(countdownInterval);
+                        }
+                    }, 1000);
+                    
+                    audioElement.play().catch(function(error) {
+                        console.error('Error al reproducir anuncio:', error);
+                        handleAudioError(audioElement, audioId, $container);
+                    });
+                })
+                .fail(function() {
+                    state.hasPlayedAd = true;
+                    state.isPlayingAd = false;
+                    state.adProcessing = false;
+                    audioStates.set(audioId, state);
+                    
+                    audioElement.src = state.originalSrc;
+                    audioElement.load();
+                    audioElement.play().catch(function(error) {
+                        console.error('Error al reproducir canción después del fallo:', error);
+                    });
+                });
+        }
+        
+        // FUNCIÓN PRINCIPAL DE CARGA DE PLAYLISTS
+        function loadUserPlaylists() {
+            console.log('=== INICIANDO CARGA DE PLAYLISTS ===');
+            console.log('selectedContentId en loadUserPlaylists:', selectedContentId);
+            
+            if (!selectedContentId) {
+                console.error('No hay contenido seleccionado en loadUserPlaylists');
+                $('#playlist-list').html('<div class="text-center p-4"><p class="text-danger">Error: No se ha seleccionado contenido</p><small class="text-muted">Intenta cerrar el modal y hacer clic en "Agregar a Playlist" de una canción</small></div>');
+                return;
+            }
+            
+            // Mostrar loading
+            $('#playlist-list').html('<div class="text-center p-3"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div><br><small class="text-muted">Cargando playlists...</small></div>');
+            
+            $.ajax({
+                url: '@Url.Action("GetUserPlaylists", "Clients")',
+                type: 'GET',
+                dataType: 'json',
+                timeout: 10000,
+                success: function(data) {
+                    console.log('=== PLAYLISTS RECIBIDAS ===');
+                    console.log('Data:', data);
+                    
+                    var playlistHtml = '';
+                    
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        console.log('Procesando', data.length, 'playlists');
+                        
+                        data.forEach(function(playlist, index) {
+                            var playlistName = playlist.name || 'Sin nombre';
+                            var playlistId = playlist.id || 0;
+                            var songsCount = playlist.songsCount || 0;
+                            
+                            playlistHtml += `
+                                <div class="playlist-item d-flex justify-content-between align-items-center mb-2 p-3 border rounded">
+                                    <div class="playlist-info">
+                                        <div class="fw-bold text-primary">${playlistName}</div>
+                                        <small class="text-muted">${songsCount} canción(es)</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary" 
+                                            onclick="addToPlaylist(${playlistId})" 
+                                            data-playlist-id="${playlistId}">
+                                        Agregar
+                                    </button>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        playlistHtml = `
+                            <div class="text-center p-4">
+                                <p class="text-muted mb-0">No tienes playlists creadas</p>
+                                <small class="text-muted">Crea tu primera playlist abajo</small>
+                            </div>
+                        `;
+                    }
+                    
+                    $('#playlist-list').html(playlistHtml);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar playlists:', error);
+                    $('#playlist-list').html(`
+                        <div class="text-center p-4">
+                            <p class="text-danger mb-1">Error al cargar playlists</p>
+                            <button class="btn btn-sm btn-outline-primary mt-2" onclick="loadUserPlaylists()">
+                                Intentar de nuevo
+                            </button>
+                        </div>
+                    `);
+                }
+            });
+        }
+        
+        function addToPlaylist(playlistId) {
+            console.log('=== AGREGANDO A PLAYLIST ===');
+            console.log('Playlist ID:', playlistId);
+            console.log('Content ID:', selectedContentId);
+            
+            if (!selectedContentId) {
+                console.error('selectedContentId es null en addToPlaylist!');
+                showToast('Error: No se ha seleccionado contenido', 'error');
+                return;
+            }
+            
+            var button = $(`button[data-playlist-id="${playlistId}"]`);
+            if (button.length === 0) {
+                button = $(`button[onclick="addToPlaylist(${playlistId})"]`);
+            }
+            
+            var originalHtml = button.html();
+            button.html('Agregando...').prop('disabled', true);
+            
+            $.post('@Url.Action("AddToPlaylist", "Clients")', { 
+                playlistId: playlistId, 
+                contentId: selectedContentId 
+            })
+            .done(function(data) {
+                console.log('Respuesta agregar a playlist:', data);
+                if (data.success) {
+                    showToast('Contenido agregado a la playlist', 'success');
+                    $('#playlistModal').modal('hide');
+                } else {
+                    showToast(data.message || 'Error al agregar a la playlist', 'error');
+                }
+            })
+            .fail(function(xhr, status, error) {
+                console.error('Error al agregar a playlist:', error);
+                showToast('Error al agregar contenido a la playlist', 'error');
+            })
+            .always(function() {
+                button.html(originalHtml).prop('disabled', false);
+            });
+        }
+        
+        function createPlaylistAndAddContent(playlistName) {
+            console.log('=== CREANDO PLAYLIST ===');
+            console.log('Nombre:', playlistName);
+            console.log('Content ID:', selectedContentId);
+            
+            if (!selectedContentId) {
+                console.error('selectedContentId es null en createPlaylistAndAddContent!');
+                showToast('Error: No se ha seleccionado contenido', 'error');
+                return;
+            }
+            
+            $('#create-playlist-btn').html('Creando...').prop('disabled', true);
+            
+            $.post('@Url.Action("CreatePlaylist", "Clients")', { 
+                name: playlistName,
+                contentId: selectedContentId 
+            })
+            .done(function(data) {
+                console.log('Respuesta crear playlist:', data);
+                if (data.success) {
+                    showToast(data.message || 'Playlist creada y contenido agregado correctamente', 'success');
+                    $('#playlistModal').modal('hide');
+                    $('#new-playlist-name').val('');
+                } else {
+                    showToast(data.message || 'Error al crear la playlist', 'error');
+                }
+            })
+            .fail(function(xhr, status, error) {
+                console.error('Error al crear playlist:', error);
+                showToast('Error al crear playlist', 'error');
+            })
+            .always(function() {
+                $('#create-playlist-btn').html('Crear Nueva Playlist').prop('disabled', false);
+            });
+        }
+        
+        function loadLikes() {
+            $('.like-btn').each(function() {
+                var contentId = $(this).data('content-id');
+                loadLikesForContent(contentId);
+            });
+        }
+        
+        function loadLikesForContent(contentId) {
+            $.get('@Url.Action("GetContentLikes", "Clients")', { contentId: contentId })
+                .done(function(data) {
+                    $('[data-content-id="' + contentId + '"] .like-count').text(data.likes);
+                });
+        }
+        
+        function showToast(message, type) {
+            const toastElement = document.getElementById('liveToast');
+            const messageElement = document.getElementById('toast-message');
+            
+            toastElement.className = 'toast';
+            if (type === 'success') {
+                toastElement.classList.add('bg-success', 'text-white');
+            } else if (type === 'error') {
+                toastElement.classList.add('bg-danger', 'text-white');
+            } else {
+                toastElement.classList.add('bg-info', 'text-white');
+            }
+            
+            messageElement.textContent = message;
+            
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+        
+        // FUNCIÓN DE TESTING
+        window.testPlaylistModal = function() {
+            selectedContentId = 1;
+            $('#playlistModal').modal('show');
+        };
+        
+        // FUNCIÓN DE DEBUG
+        window.checkSelectedContent = function() {
+            console.log('selectedContentId actual:', selectedContentId);
+            return selectedContentId;
+        };
     </script>
 }
