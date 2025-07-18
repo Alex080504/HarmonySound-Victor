@@ -12,9 +12,51 @@ namespace HarmonySound.MVC.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            // Agregar esta línea para obtener el userId
+            int userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+            ViewBag.UserId = userId; // ESTO ES LO QUE FALTA
+
             Crud<Content>.EndPoint = "https://localhost:7120/api/Contents";
-            var contenidos = Crud<Content>.GetAll();
-            return View(contenidos);
+            var contents = Crud<Content>.GetAll();
+            
+            // Obtener información de los artistas para cada contenido
+            var contentsWithArtists = new List<ContentWithArtistDto>();
+            
+            using (var client = new HttpClient())
+            {
+                var userIds = contents.Select(c => c.ArtistId).Distinct().ToList();
+                var artists = new Dictionary<int, string>();
+                
+                foreach (var artistId in userIds)
+                {
+                    var artistResponse = await client.GetAsync($"https://localhost:7120/api/Users/profile/{artistId}");
+                    if (artistResponse.IsSuccessStatusCode)
+                    {
+                        var artistJson = await artistResponse.Content.ReadAsStringAsync();
+                        var artist = System.Text.Json.JsonSerializer.Deserialize<User>(artistJson, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        artists[artistId] = artist?.Name ?? "Artista desconocido";
+                    }
+                    else
+                    {
+                        artists[artistId] = "Artista desconocido";
+                    }
+                }
+
+                // Convertir a ContentWithArtistDto
+                contentsWithArtists = contents.Select(c => new ContentWithArtistDto
+                {
+                    Id = c.Id,
+                    Title = c.Title,
+                    Type = c.Type,
+                    UrlMedia = c.UrlMedia,
+                    Duration = c.Duration,
+                    UploadDate = c.UploadDate,
+                    ArtistId = c.ArtistId,
+                    ArtistName = artists.GetValueOrDefault(c.ArtistId, "Artista desconocido")
+                }).ToList();
+            }
+
+            return View(contentsWithArtists);
         }
         public async Task<IActionResult> EditProfile()
         {
@@ -152,7 +194,39 @@ namespace HarmonySound.MVC.Controllers
                     if (contentsResponse.IsSuccessStatusCode)
                     {
                         var contentsJson = await contentsResponse.Content.ReadAsStringAsync();
-                        model.Contents = System.Text.Json.JsonSerializer.Deserialize<List<Content>>(contentsJson, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+                        var contents = System.Text.Json.JsonSerializer.Deserialize<List<Content>>(contentsJson, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+                        
+                        // Obtener información de los artistas para cada contenido
+                        var userIds = contents.Select(c => c.ArtistId).Distinct().ToList();
+                        var artists = new Dictionary<int, string>();
+                        
+                        foreach (var artistId in userIds)
+                        {
+                            var artistResponse = await client.GetAsync($"https://localhost:7120/api/Users/profile/{artistId}");
+                            if (artistResponse.IsSuccessStatusCode)
+                            {
+                                var artistJson = await artistResponse.Content.ReadAsStringAsync();
+                                var artist = System.Text.Json.JsonSerializer.Deserialize<User>(artistJson, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                                artists[artistId] = artist?.Name ?? "Artista desconocido";
+                            }
+                            else
+                            {
+                                artists[artistId] = "Artista desconocido";
+                            }
+                        }
+
+                        // Convertir a ContentWithArtistDto
+                        model.Contents = contents.Select(c => new ContentWithArtistDto
+                        {
+                            Id = c.Id,
+                            Title = c.Title,
+                            Type = c.Type,
+                            UrlMedia = c.UrlMedia,
+                            Duration = c.Duration,
+                            UploadDate = c.UploadDate,
+                            ArtistId = c.ArtistId,
+                            ArtistName = artists.GetValueOrDefault(c.ArtistId, "Artista desconocido")
+                        }).ToList();
                     }
                 }
             }
@@ -459,6 +533,36 @@ namespace HarmonySound.MVC.Controllers
             catch (Exception ex)
             {
                 return Json(new { url = "/ads/ad1.mp3", duration = 15, title = "Suscríbete a Premium" });
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUserLikes()
+        {
+            try
+            {
+                int userId = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value);
+                
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetAsync($"https://localhost:7120/api/Contents/user-likes/{userId}");
+                    
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var json = await response.Content.ReadAsStringAsync();
+                        var likedContentIds = System.Text.Json.JsonSerializer.Deserialize<List<int>>(json);
+                        return Json(likedContentIds ?? new List<int>());
+                    }
+                    else
+                    {
+                        return Json(new List<int>());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en GetUserLikes: {ex.Message}");
+                return Json(new List<int>());
             }
         }
     }
